@@ -17,30 +17,30 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 
-import { ThreadValidation } from "@/lib/validations/thread";
-import { createThread } from "@/lib/actions/thread.actions";
+import { ThoughtValidation } from "@/lib/validations/thought";
+import { createThought } from "@/lib/actions/thought.actions";
 
 interface Props {
   userId: string;
 }
 
-function PostThread({ userId }: Props) {
+function PostThought({ userId }: Props) {
   const router = useRouter();
   const pathname = usePathname();
 
   const { organization } = useOrganization();
 
-  const form = useForm<z.infer<typeof ThreadValidation>>({
-    resolver: zodResolver(ThreadValidation),
+  const form = useForm<z.infer<typeof ThoughtValidation>>({
+    resolver: zodResolver(ThoughtValidation),
     defaultValues: {
-      thread: "",
+      thought: "",
       accountId: userId,
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
-    await createThread({
-      text: values.thread,
+  const onSubmit = async (values: z.infer<typeof ThoughtValidation>) => {
+    await createThought({
+      text: values.thought,
       author: userId,
       communityId: organization ? organization.id : null,
       path: pathname,
@@ -57,7 +57,7 @@ function PostThread({ userId }: Props) {
       >
         <FormField
           control={form.control}
-          name='thread'
+          name='thought'
           render={({ field }) => (
             <FormItem className='flex w-full flex-col gap-3'>
               <FormLabel className='text-base-semibold text-light-2'>
@@ -79,4 +79,4 @@ function PostThread({ userId }: Props) {
   );
 }
 
-export default PostThread;
+export default PostThought;

@@ -4,7 +4,7 @@ import { FilterQuery, SortOrder } from "mongoose";
 import { revalidatePath } from "next/cache";
 
 import Community from "../models/community.model";
-import Thread from "../models/thread.model";
+import Thought from "../models/thought.model";
 import User from "../models/user.model";
 
 import { connectToDB } from "../mongoose";
@@ -66,10 +66,10 @@ export async function fetchUserPosts(userId: string) {
   try {
     connectToDB();
 
-    // Find all threads authored by the user with the given userId
-    const threads = await User.findOne({ id: userId }).populate({
-      path: "threads",
-      model: Thread,
+    // Find all thoughts authored by the user with the given userId
+    const thoughts = await User.findOne({ id: userId }).populate({
+      path: "thoughts",
+      model: Thought,
       populate: [
         {
           path: "community",
@@ -78,7 +78,7 @@ export async function fetchUserPosts(userId: string) {
         },
         {
           path: "children",
-          model: Thread,
+          model: Thought,
           populate: {
             path: "author",
             model: User,
@@ -87,9 +87,9 @@ export async function fetchUserPosts(userId: string) {
         },
       ],
     });
-    return threads;
+    return thoughts;
   } catch (error) {
-    console.error("Error fetching user threads:", error);
+    console.error("Error fetching user thoughts:", error);
     throw error;
   }
 }
@@ -157,18 +157,18 @@ export async function getActivity(userId: string) {
   try {
     connectToDB();
 
-    // Find all threads created by the user
-    const userThreads = await Thread.find({ author: userId });
+    // Find all thoughts created by the user
+    const userThoughts = await Thought.find({ author: userId });
 
-    // Collect all the child thread ids (replies) from the 'children' field of each user thread
-    const childThreadIds = userThreads.reduce((acc, userThread) => {
-      return acc.concat(userThread.children);
+    // Collect all the child thought ids (replies) from the 'children' field of each user thought
+    const childThoughtIds = userThoughts.reduce((acc, userThought) => {
+      return acc.concat(userThought.children);
     }, []);
 
-    // Find and return the child threads (replies) excluding the ones created by the same user
-    const replies = await Thread.find({
-      _id: { $in: childThreadIds },
-      author: { $ne: userId }, // Exclude threads authored by the same user
+    // Find and return the child thoughts (replies) excluding the ones created by the same user
+    const replies = await Thought.find({
+      _id: { $in: childThoughtIds },
+      author: { $ne: userId }, // Exclude thoughts authored by the same user
     }).populate({
       path: "author",
       model: User,
