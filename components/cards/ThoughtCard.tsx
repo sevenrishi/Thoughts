@@ -77,6 +77,7 @@ function ThoughtCard({
                   width={24}
                   height={24}
                   className='cursor-pointer object-contain'
+                  title='Like'
                 />
                 <Link href={`/thought/${id}`}>
                   <Image
@@ -85,6 +86,7 @@ function ThoughtCard({
                     width={24}
                     height={24}
                     className='cursor-pointer object-contain'
+                    title='Reply'
                   />
                 </Link>
                 <Image
@@ -93,6 +95,7 @@ function ThoughtCard({
                   width={24}
                   height={24}
                   className='cursor-pointer object-contain'
+                  title='Repost'
                 />
                 <Image
                   src='/assets/share.svg'
@@ -100,6 +103,7 @@ function ThoughtCard({
                   width={24}
                   height={24}
                   className='cursor-pointer object-contain'
+                  title='Share'
                 />
               </div>
 
