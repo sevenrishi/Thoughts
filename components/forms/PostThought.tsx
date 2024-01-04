@@ -51,11 +51,16 @@ function PostThought({ userId }: Props) {
     setShowEmojiPicker(!showEmojiPicker); // Toggle emoji picker visibility
   };
 
-  const handleEmojiSelect = (emoji: string) => {
-    // Update the thought field with the selected emoji
-    form.setValue("thought", form.getValues("thought") + emoji);
+  const handleEmojiSelect = (event, emojiObject) => {
+    if (!emojiObject || !emojiObject.emoji) return; // Return early if undefined
+  
+    // Directly update the 'thought' field using form.setValue
+    form.setValue("thought", (currentThought) => currentThought + emojiObject.emoji);
     setShowEmojiPicker(false); // Close the emoji picker
   };
+  
+  
+  
 
   return (
     <Form {...form}>
@@ -88,9 +93,9 @@ function PostThought({ userId }: Props) {
   )}
 />
 
-        {showEmojiPicker && (
-          <EmojiPicker onSelect={handleEmojiSelect} /> // Render the emoji picker
-        )}
+{showEmojiPicker && (
+  <EmojiPicker onEmojiClick={handleEmojiSelect} />
+)}
 
         <Button type='submit' className='bg-primary-500'>
           Post Thought
