@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Thoughts",
-  description: "A Next.js 13 Meta Thoughts application",
+  description: "Post your thoughts on Thoughts",
 };
 
 export default function RootLayout({
