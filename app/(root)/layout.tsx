@@ -14,7 +14,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Thoughts",
-  description: "A Next.js 13 Meta Thoughts application",
+  description: "Post your thoughts on Thoughts",
 };
 
 export default function RootLayout({
@@ -29,6 +29,13 @@ export default function RootLayout({
       }}
     >
       <html lang='en'>
+      <Head>
+          {/* Add Google AdSense meta tag */}
+          <meta name="google-adsense-account" content="ca-pub-7043233660980321" />
+
+          {/* Add other meta tags as needed */}
+          {/* ... */}
+        </Head>
         <body className={inter.className}>
           <Topbar />
 
