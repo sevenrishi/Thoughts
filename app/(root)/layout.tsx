@@ -33,12 +33,13 @@ export default function RootLayout({
       <Head>
           {/* Add Google AdSense meta tag */}
           <meta name="google-adsense-account" content="ca-pub-7043233660980321" />
-          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7043233660980321"
-     crossorigin="anonymous"></script>
+          
 
           {/* Add other meta tags as needed */}
           {/* ... */}
         </Head>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7043233660980321"
+     crossorigin="anonymous"></script>
         <body className={inter.className}>
           <Topbar />
 
