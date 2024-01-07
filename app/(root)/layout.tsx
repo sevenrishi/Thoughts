@@ -38,8 +38,6 @@ export default function RootLayout({
           {/* Add other meta tags as needed */}
           {/* ... */}
         </Head>
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7043233660980321"
-     crossorigin="anonymous"></script>
         <body className={inter.className}>
           <Topbar />
 
